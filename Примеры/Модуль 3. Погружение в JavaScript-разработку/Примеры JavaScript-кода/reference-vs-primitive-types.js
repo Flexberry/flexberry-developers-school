@@ -1,9 +1,10 @@
 // 1. Примитивные типы
 let personName = 'Alex';
-var age = 27;
+let age = 27;
 let isMale = true;
 let noValue = null;
 let someVariable = undefined;
+let id = Symbol('id');
 
 // 2. Ссылочные типы
 const hobbies = ['Sports', 'Cooking'];

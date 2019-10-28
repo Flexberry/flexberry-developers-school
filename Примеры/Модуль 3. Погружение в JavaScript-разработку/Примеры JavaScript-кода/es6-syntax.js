@@ -129,3 +129,42 @@ console.log('cat type:', Cat.getType()); // "Cat"
 const lion = new Lion('King', 7);
 lion.speak(); // "King make a sound", "King roars"
 console.log('lion type:', Lion.getType()); // "Lion"
+
+// 7. Методы массивов
+// Оператор for..of (перебор элементов)
+console.log('for..of:');
+for (let hobby of hobbies) {
+  console.log(hobby); // "Music", "Sport"
+}
+
+// Метод forEach (перебор элементов)
+console.log('Array.forEach:');
+hobbies.forEach((hobby, index, arr) => {
+  console.log(`${index + 1}.`, hobby); // "1. Music", "2. Sport"
+});
+
+// Метод map (создание нового массива на основе имеющегося)
+const hobbiesWithDescription = hobbies.map((hobby, index, arr) => `Hobby: ${hobby}`);
+console.log('hobbiesWithDescription:', hobbiesWithDescription); // ["Hobby: Music", "Hobby: Sport"]
+
+// Метод filter (создание нового массива на основе фильтрации существующего)
+const hobbiesStartsWithM = hobbies.filter((hobby, index, arr) =>
+  hobby.toLowerCase().startsWith('m')
+);
+console.log('hobbiesStartsWithM:', hobbiesStartsWithM); // ["Music"]
+
+// Метод reduce (применение функции к каждому элементу и аккумуляция результирующих значений)
+const allHobbies = hobbies.reduce(
+  (prevValue, currentHobbie) =>
+    prevValue + currentHobbie + (hobbies.indexOf(currentHobbie) < hobbies.length - 1 ? ', ' : ''),
+  'Hobbies: '
+);
+console.log('allHobbies:', allHobbies); // "Hobbies: Music, Sport"
+
+// Метод find (поиск элемента в массиве)
+const musicHobby = hobbies.find((hobby, index, arr) => hobby === 'Music');
+console.log('musicHobby:', musicHobby); // "Music"
+
+// Метод findIndex (поиск индекса элемента в массиве)
+const musicHobbyIndex = hobbies.findIndex((hobby, index, arr) => hobby === 'Music');
+console.log('musicHobbyIndex:', musicHobbyIndex); // 0
