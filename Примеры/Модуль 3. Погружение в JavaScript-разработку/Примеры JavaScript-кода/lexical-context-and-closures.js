@@ -54,7 +54,7 @@ counter = null;
 
 // 3. Использование замыканий в циклах
 // Глобальная видимость i
-for (var i = 0; i < 10; i++)
+for (var i = 0; i < 10; i++) {
   setTimeout(function() {
     console.log(i); // 10, 10,..., 10
   }, 1000);
