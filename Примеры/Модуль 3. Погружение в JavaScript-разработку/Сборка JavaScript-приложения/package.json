@@ -1,0 +1,40 @@
+{
+  "name": "broccoli-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "broccoli build",
+    "serve": "broccoli serve",
+    "build-prod": "BROCCOLI_ENV=production broccoli build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "broccoli": "^3.1.2",
+    "broccoli-asset-rev": "^3.0.0",
+    "broccoli-clean-css": "^2.0.1",
+    "broccoli-cli": "^1.0.0",
+    "broccoli-env": "0.0.1",
+    "broccoli-funnel": "^2.0.2",
+    "broccoli-lint-eslint": "^5.0.0",
+    "broccoli-livereload": "^1.4.0",
+    "broccoli-merge-trees": "^3.0.2",
+    "broccoli-rollup": "^4.1.1",
+    "broccoli-sass-lint": "^1.1.2",
+    "broccoli-sass-source-maps": "^4.0.0",
+    "eslint": "^6.1.0",
+    "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "sass": "^1.22.9"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
