@@ -1,0 +1,27 @@
+{
+  "name": "tests-example",
+  "version": "0.1.0",
+  "description": "Template for JavaScript test project",
+  "main": "index.js",
+  "scripts": {
+    "lint.js": "eslint src/**/*.js",
+    "test": "testem ci"
+  },
+  "author": "Evgeniy Khaberev <ekhaberev@flexberry.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "rollup": "^1.26.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "testem": "^3.0.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "rimraf": "^3.0.0",
+    "rollup-plugin-multi-entry": "^2.1.0"
+  }
+}

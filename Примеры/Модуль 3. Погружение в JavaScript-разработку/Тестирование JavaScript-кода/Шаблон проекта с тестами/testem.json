@@ -1,0 +1,9 @@
+{
+  "test_page": "tests/index.mustache",
+  "src_files": ["tests/test-bundle.js"],
+  "before_tests": "npx rollup --config",
+  "on_exit": "rimraf tests/test-bundle.js",
+  "disable_watching": true,
+  "launch_in_ci": ["Headless Chrome"],
+  "launch_in_dev": ["Chrome"]
+}
