@@ -5,7 +5,7 @@ export default {
   input: 'tests/**/*.js',
   output: {
     file: 'tests/test-bundle.js',
-    format: 'iife',
+    format: 'es',
   },
   plugins: [
     babel({
