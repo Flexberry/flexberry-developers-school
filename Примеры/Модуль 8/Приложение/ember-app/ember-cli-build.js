@@ -1,13 +1,32 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const autoprefixer = require('autoprefixer');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     lessOptions: {
       paths: [
-        'bower_components/semantic-ui'
+          'bower_components/semantic-ui',
+          'node_modules/ember-flexberry-themes',
       ]
+    },
+    postcssOptions: {
+      compile: {
+        enabled: false,
+        browsers: ['last 3 versions'],
+      },
+      filter: {
+        enabled: true,
+        plugins: [
+          {
+            module: autoprefixer,
+            options: {
+              browsers: ['last 3 versions']
+            }
+          }
+        ]
+      }
     }
 
     // Add options here
