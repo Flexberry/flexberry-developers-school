@@ -45,6 +45,8 @@ const CheckProductAmount = BaseValidator.extend({
         } else {
           return true;
         }
+    }).catch(function() {
+      return `Ошибка выполнения запроса к серверу`;
     });
   }
 });
