@@ -1,0 +1,89 @@
+version: '3'
+
+services:
+  gateway:
+    image: ${AUTHOR}/fds-gateway:${TAG}
+    environment:
+      - NGINX_CONF_VARIABLES=${GATEWAY_CONF_VARIABLES}
+      - SERVER_NAME=${GATEWAY_SERVER_NAME}
+    ports:
+      - 80:80
+    deploy:
+      update_config:
+        delay: 60s
+      resources:
+        reservations:
+          memory: 128M
+        limits:
+          memory: ${GATEWAY_LIMIT_MEMORY}
+
+  app-ember:
+    image: ${AUTHOR}/fds-ember:${TAG}
+    deploy:
+      update_config:
+        delay: 60s
+      resources:
+        reservations:
+          memory: 128M
+        limits:
+          memory: ${APP_EMBER_LIMIT_MEMORY}
+
+  app-odata:
+    image: ${AUTHOR}/fds-odata:${TAG}
+    environment:
+      - DOCKER_SERVICE_NAME={{.Service.Name}}
+      - DOCKER_NODE_HOSTNAME={{.Node.Hostname}}
+      - DOCKER_TASK_SLOT={{.Task.Slot}}
+      - http_proxy=$http_proxy
+      - https_proxy=$https_proxy
+      - no_proxy=$no_proxy
+      - APP_BACKENDROOT=${APP_BACKENDROOT}
+      - MONO_OPTIONS=${MONO_OPTIONS}
+      - APP_CONNECTIONSTRING=${APP_CONNECTIONSTRING}
+    deploy:
+      replicas: ${APP_ODATA_REPLICAS}
+      update_config:
+        delay: 60s
+      resources:
+        reservations:
+          memory: 128M
+        limits:
+          memory: ${APP_ODATA_LIMIT_MEMORY}
+
+  dbapp:
+    image: ${AUTHOR}/postgresql
+    environment:
+      - POSTGRES_max_connections=${APP_POSTGRES_max_connections}
+      - POSTGRES_shared_buffers=${APP_POSTGRES_shared_buffers}
+      - POSTGRES_temp_buffers=${APP_POSTGRES_temp_buffers}
+      - POSTGRES_work_mem=${APP_POSTGRES_work_mem}
+      - POSTGRES_maintenance_work_mem=${APP_POSTGRES_maintenance_work_mem}
+      - POSTGRES_shared_preload_libraries=${APP_POSTGRES_shared_preload_libraries}
+      - POSTGRES_log_destination=${APP_POSTGRES_log_destination}
+      - POSTGRES_logging_collector=${APP_POSTGRES_logging_collector}
+      - POSTGRES_log_truncate_on_rotation=${APP_POSTGRES_log_truncate_on_rotation}
+      - POSTGRES_log_rotation_age=${APP_POSTGRES_log_rotation_age}
+      - POSTGRES_log_checkpoints=${APP_POSTGRES_log_checkpoints}
+      - POSTGRES_log_lock_waits=${APP_POSTGRES_log_lock_waits}
+      - POSTGRES_log_temp_files=${APP_POSTGRES_log_temp_files}
+      - POSTGRES_track_activities=${APP_POSTGRES_track_activities}
+      - POSTGRES_track_counts=${APP_POSTGRES_track_counts}
+      - POSTGRES_track_io_timing=${APP_POSTGRES_track_io_timing}
+      - POSTGRES_track_functions=${APP_POSTGRES_track_functions}
+      - POSTGRES_track_activity_query_size=${APP_POSTGRES_track_activity_query_size}
+    ports:
+      - ${DBAPP_PORT}:5432
+    deploy:
+      update_config:
+        delay: 60s
+      resources:
+        reservations:
+          memory: 128M
+      placement:
+        constraints:
+          - node.labels.havessd == 1
+    volumes:
+      - dbapp:/var/lib/pgsql/data/
+
+volumes:
+  dbapp:
