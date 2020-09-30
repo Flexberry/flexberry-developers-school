@@ -68,4 +68,4 @@ export GATEWAY_SERVER_NAME=eais.ics.perm.ru
 
 # parameters for app
 export APP_BACKENDROOT=http://eais.ics.perm.ru
-export APP_CONNECTIONSTRING="Server=dbapp;Port=25432;User Id=postgres;Password=p@ssw0rd;Database=shop;Keepalive=30;CommandTimeout=180;"
+export APP_CONNECTIONSTRING="Server=dbapp;Port=5432;User Id=postgres;Password=p@ssw0rd;Database=shop;Keepalive=30;CommandTimeout=180;"
