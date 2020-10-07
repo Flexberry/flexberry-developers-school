@@ -4,6 +4,8 @@ using Unity;
 
 namespace IIS.Shop
 {
+    using Microsoft.Practices.Unity.Configuration;
+
     /// <summary>
     /// Specifies the Unity configuration for the main container.
     /// </summary>
@@ -38,7 +40,7 @@ namespace IIS.Shop
         {
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
+            container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
