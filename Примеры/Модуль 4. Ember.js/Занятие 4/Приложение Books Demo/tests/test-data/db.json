@@ -1,0 +1,64 @@
+{
+  "authors": [
+    {
+      "id": 1,
+      "type": "author",
+      "firstName": "Robert",
+      "lastName": "Martin"
+    },
+    {
+      "id": 2,
+      "type": "author",
+      "firstName": "C.S",
+      "lastName": "Lewis"
+    },
+    {
+      "id": 3,
+      "type": "author",
+      "firstName": "Edgar",
+      "lastName": "Por"
+    },
+    {
+      "type": "author",
+      "firstName": "Lev",
+      "lastName": "Tolstoy",
+      "id": 4
+    },
+    {
+      "type": "author",
+      "firstName": "Ivan",
+      "lastName": "Ivanov",
+      "id": 5
+    },
+    {
+      "type": "author",
+      "firstName": "Sergey",
+      "lastName": "Sergeev",
+      "id": 6
+    },
+    {
+      "type": "author",
+      "firstName": "Konstantin",
+      "lastName": "Petrov",
+      "id": 7
+    },
+    {
+      "type": "author",
+      "firstName": "Mikhail",
+      "lastName": "Lermontov",
+      "id": 8
+    },
+    {
+      "type": "author",
+      "firstName": "New",
+      "lastName": "Author",
+      "id": 9
+    },
+    {
+      "type": "author",
+      "firstName": "Sergey",
+      "lastName": "Petrov",
+      "id": 10
+    }
+  ]
+}
