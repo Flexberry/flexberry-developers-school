@@ -2,8 +2,13 @@ import Service from '@ember/service';
 import ENV from 'books-demo/config/environment';
 
 export default Service.extend({
-  getAuthors() {
-    return fetch(`${ENV.backendURL}/authors`).then((response) => response.json());
+  getAuthors(search) {
+    let queryParams = '';
+    if (search) {
+      queryParams=`?q=${search}`;
+    }
+
+    return fetch(`${ENV.backendURL}/authors${queryParams}`).then((response) => response.json());
   },
 
   getAuthor(id) {
