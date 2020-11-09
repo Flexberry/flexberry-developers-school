@@ -1,0 +1,30 @@
+{
+  "authors": {
+    "data": [
+      {
+        "id": 1,
+        "type": "author",
+        "attributes": {
+          "first-name": "Robert",
+          "last-name": "Martin"
+        }
+      },
+      {
+        "id": 2,
+        "type": "author",
+        "attributes": {
+          "first-name": "C.S.",
+          "last-name": "Lewis"
+        }
+      },
+      {
+        "id": 3,
+        "type": "author",
+        "attributes": {
+          "first-name": "Edgar",
+          "last-name": "Poe"
+        }
+      }
+    ]
+  }
+}

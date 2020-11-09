@@ -13,5 +13,11 @@ export default DS.JSONSerializer.extend({
     };
 
     return hash;
+  },
+
+  serialize(snapshot, options) {
+    let json = this._super(...arguments);
+    json.type = snapshot.modelName;
+    return json;
   }
 });

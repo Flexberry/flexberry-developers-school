@@ -5,13 +5,9 @@ export default Controller.extend({
   dataService: service('data'),
   actions: {
     async deleteAuthor(author) {
-      try {
-        await this.get('dataService').deleteAuthor(author);
+        await author.destroyRecord();
+
         this.transitionToRoute('author.index');
-      }
-      catch (e) {
-        this.send('error', new Error('Connection failed'));
-      }
     }
   }
 });

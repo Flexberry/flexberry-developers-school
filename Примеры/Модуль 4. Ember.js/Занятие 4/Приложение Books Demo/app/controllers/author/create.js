@@ -5,9 +5,9 @@ export default Controller.extend({
   dataService: service('data'),
   actions: {
     async saveAuthor(author) {
-      await this.get("dataService").createAuthor(author);
-      this.get('model').set('firstName', author.firstName);
-      this.get('model').set('lastName', author.lastName);
+      let newAuthor = this.get('store').createRecord('author', author);
+      newAuthor.serialize();
+      await newAuthor.save();
 
       this.transitionToRoute('author.index');
     },

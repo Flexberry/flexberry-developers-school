@@ -5,7 +5,11 @@ export default Controller.extend({
   dataService: service('data'),
   actions: {
     async saveAuthor(author) {
-      await this.get("dataService").updateAuthor(author);
+      let authorModel = this.get('model');
+      authorModel.set('firstName', author.firstName);
+      authorModel.set('lastName', author.lastName);
+
+      await authorModel.save();
 
       this.transitionToRoute('author.index');
     }

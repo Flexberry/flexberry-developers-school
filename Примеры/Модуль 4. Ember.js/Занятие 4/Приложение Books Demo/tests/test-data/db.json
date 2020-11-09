@@ -47,18 +47,6 @@
       "firstName": "Mikhail",
       "lastName": "Lermontov",
       "id": 8
-    },
-    {
-      "type": "author",
-      "firstName": "New",
-      "lastName": "Author",
-      "id": 9
-    },
-    {
-      "type": "author",
-      "firstName": "Sergey",
-      "lastName": "Petrov",
-      "id": 10
     }
   ]
 }

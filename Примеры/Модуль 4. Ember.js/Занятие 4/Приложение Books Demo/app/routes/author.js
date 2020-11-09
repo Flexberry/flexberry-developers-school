@@ -54,7 +54,7 @@ export default Route.extend({
 
   actions: {
     refreshAuthors() {
-      this.refresh();
+      // this.refresh();
     },
     // loading(transition, originRoute) {
     //   return false;
