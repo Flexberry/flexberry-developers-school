@@ -8,12 +8,14 @@
     </h1>
 
     <ul>
-      <li>
-        {{#link-to "author.index"}}
-          Authors
-        {{/link-to}}
-      </li>
-      <li><a href>Books</a></li>
+      <li>{{#link-to "author.index"}}Authors{{/link-to}}</li>
+      <li>{{#link-to "book.index"}}Books{{/link-to}}</li>
+      {{#if session.isAuthenticated}}
+        <li><a href="#" onclick={{action "logout"}}>Logout</a></li>
+      {{else}}
+        <li>{{#link-to "register"}}Register{{/link-to}}</li>
+        <li>{{#link-to "login"}}Login{{/link-to}}</li>
+      {{/if}}
     </ul>
   </nav>
 
