@@ -1,0 +1,41 @@
+<div class="slide-out-bg"></div>
+
+<div class="slide-out">
+  <div class="slide-out-card">
+    {{#link-to "book.index" class="btn-back"}}
+      <span class="sr-only">Back</span>
+    {{/link-to}}
+
+    <div class="slide-out-heading">
+      <div class="title">
+        <h3>{{this.model.title}}</h3>
+
+        {{#if (await (can "edit book" model))}}
+          <div class="actions">
+            {{#link-to "book.edit" model.id class="btn-pop"}}edit{{/link-to}}
+
+            <button class="btn-recessed" onclick={{action "deleteBook"}}>delete</button>
+          </div>
+        {{/if}}
+      </div>
+      <div class="details">
+        <p>
+          <strong>Author:</strong>
+          {{#link-to "author.detail" model.author.id}}
+            {{model.author.lastName}} {{model.author.firstName}}
+          {{/link-to}}
+        </p>
+        <p>
+          <strong>Publish Date:</strong>
+          {{moment-format model.publishDate "Do MMMM YYYY"}}
+        </p>
+        <p>
+          <strong>ISBN:</strong>
+          {{model.isbn}}
+        </p>
+      </div>
+    </div>
+
+    {{outlet class="no-overflow"}}
+  </div>
+</div>

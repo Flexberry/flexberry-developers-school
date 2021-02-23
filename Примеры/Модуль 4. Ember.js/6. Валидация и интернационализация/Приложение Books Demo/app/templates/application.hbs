@@ -1,0 +1,37 @@
+<div class="app">
+  <nav class="main-nav">
+    <h1 class="logo">
+      {{#link-to "index"}}
+        <img src="/logo.svg" alt="Ember Library">
+        <span class="sr-only">Ember Library</span>
+      {{/link-to}}
+    </h1>
+
+    <ul>
+      <li>{{#link-to "author.index"}}{{t "menu.authors"}}{{/link-to}}</li>
+      <li>{{#link-to "book.index"}}{{t "menu.books"}}{{/link-to}}</li>
+      {{#if session.isAuthenticated}}
+        <li><a href="#" onclick={{action "logout"}}>{{t "menu.logout"}}</a></li>
+      {{else}}
+        <li>{{#link-to "register"}}{{t "menu.register"}}{{/link-to}}</li>
+        <li>{{#link-to "login"}}{{t "menu.login"}}{{/link-to}}</li>
+      {{/if}}
+    </ul>
+
+    <div class="current-user">
+      <select id="languageSelect" onchange={{action "changeLocale"}}>
+        <option value="ru" selected={{isRussian}}>Русский</option>
+        <option value="en" selected={{isEnglish}}>Английский</option>
+      </select>
+    </div>
+
+    {{#if session.isAuthenticated}}
+      <div class="current-user">
+        Hello, <strong>{{currentUser.user.username}}</strong>
+        {{!-- Hello, <strong>{{this.session.data.authenticated.tokenData.username}}</strong> --}}
+      </div>
+    {{/if}}
+  </nav>
+
+  <main class="app-content">{{outlet}}</main>
+</div>

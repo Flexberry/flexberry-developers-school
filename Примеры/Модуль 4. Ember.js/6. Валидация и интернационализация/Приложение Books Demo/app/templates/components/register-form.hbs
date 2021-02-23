@@ -1,0 +1,49 @@
+<form onsubmit={{action "saveUser"}}>
+  <div class="field">
+    <label>Email:</label>
+    {{input type="text" placeholder="Email" value=email}}
+
+    {{#if (v-get this 'email' 'isInvalid')}}
+      <span class="error-message">
+        {{v-get this 'email' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="field">
+    <label>Username:</label>
+    {{input type="text" placeholder="Username" value=username}}
+
+    {{#if (v-get this 'username' 'isInvalid')}}
+      <span class="error-message">
+        {{v-get this 'username' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="field">
+    <label>Password:</label>
+    {{input type="password" placeholder="Password" value=password}}
+
+    {{#if (v-get this 'password' 'isInvalid')}}
+      <span class="error-message">
+        {{v-get this 'password' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="field">
+    <label>Confirm Password:</label>
+    {{input type="password" placeholder="Confirm Password" value=passwordConfirmation}}
+
+    {{#if (v-get this 'passwordConfirmation' 'isInvalid')}}
+      <span class="error-message">
+        {{v-get this 'passwordConfirmation' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="form-footer">
+    <button type="submit" class="btn-submit">save</button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+<form onsubmit={{action "login"}}>
+  {{#each errors as |error|}}
+    <div class="error-alert">{{error.detail}}</div>
+  {{/each}}
+  <div class="field">
+    <label>Email:</label>
+    {{input type="text" placeholder="Email" value=email}}
+    {{#if (and isInvalid (v-get this 'email' 'isInvalid'))}}
+      <span class="error-message">
+        {{v-get this 'email' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="field">
+    <label>Password:</label>
+    {{input type="password" placeholder="Password" value=password}}
+    {{#if (and isInvalid (v-get this 'password' 'isInvalid'))}}
+      <span class="error-message">
+        {{v-get this 'password' 'message'}}
+      </span>
+    {{/if}}
+  </div>
+
+
+  <div class="form-footer">
+    <button type="submit" class="btn-submit">login</button>
+  </div>
+</form>
