@@ -62,25 +62,6 @@ let Model = EmberFlexberryDataModel.extend(OfflineModelMixin, OrderItemMixin, Va
       this.set('totalSum', result);
     }
   },
-
-  /*
-   * Стоимость заказа
-   */
-  _orderSumChanged: on('init', observer('totalSum', function() {
-    once(this, '_orderSumCompute');
-  })),
-  _orderSumCompute: function() {
-    let order = this.get('order');
-    let items = order.get('orderItem');
-    let newSum = 0;
-    items.forEach(function (item) {
-      newSum += Number(item.get('totalSum'));
-    });
-
-    if (!this.get('isDeleted')) {
-      order.set('totalSum', newSum);
-    }
-  },
 });
 
 defineProjections(Model);
