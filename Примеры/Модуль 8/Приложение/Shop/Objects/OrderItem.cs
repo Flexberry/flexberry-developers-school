@@ -197,8 +197,6 @@ namespace IIS.Shop
         // *** End programmer edit section *** (OrderItem.Order CustomAttributes)
         [Agregator()]
         [NotNull()]
-        [PropertyStorage(new string[] {
-                "Заказ"})]
         public virtual IIS.Shop.Order Order
         {
             get
