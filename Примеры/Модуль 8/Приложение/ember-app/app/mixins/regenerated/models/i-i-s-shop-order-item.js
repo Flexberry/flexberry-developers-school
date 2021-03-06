@@ -70,4 +70,9 @@ export let defineProjections = function (modelClass) {
     priceWTaxes: attr('Цена с налогом', { index: 7 }),
     totalSum: attr('Сумма по позиции', { index: 8 })
   });
+
+  modelClass.defineProjection('OrderItemInOrderL', 'i-i-s-shop-order-item', {
+    amount: attr('~', { index: 0, hidden: true }),
+    priceWTaxes: attr('~', { index: 1, hidden: true })
+  });
 };

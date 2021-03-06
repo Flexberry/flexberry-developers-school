@@ -123,6 +123,26 @@
         }
       ],
       "hasMany": []
+    },
+    {
+      "name": "OrderItemInOrderL",
+      "modelName": "i-i-s-shop-order-item",
+      "attrs": [
+        {
+          "name": "amount",
+          "caption": "~",
+          "hidden": true,
+          "index": 0
+        },
+        {
+          "name": "priceWTaxes",
+          "caption": "~",
+          "hidden": true,
+          "index": 1
+        }
+      ],
+      "belongsTo": [],
+      "hasMany": []
     }
   ],
   "stored": true,

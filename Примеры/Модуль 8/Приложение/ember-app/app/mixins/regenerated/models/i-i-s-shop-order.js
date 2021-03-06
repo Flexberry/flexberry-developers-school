@@ -10,7 +10,30 @@ export let Model = Mixin.create({
   status: DS.attr('i-i-s-shop-order-status', { defaultValue: OrderStatusEnum.New }),
   shipmentDate: DS.attr('date'),
   paymentDate: DS.attr('date'),
+  /**
+    Non-stored property.
+
+    @property totalSum
+  */
   totalSum: DS.attr('number'),
+  /**
+    Method to set non-stored property.
+    Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.
+    Please, implement 'totalSumCompute' method in model class (outside of this mixin) if you want to compute value of 'totalSum' property.
+
+    @method _totalSumCompute
+    @private
+    @example
+      ```javascript
+      _totalSumChanged: on('init', observer('totalSum', function() {
+        once(this, '_totalSumCompute');
+      }))
+      ```
+  */
+  _totalSumCompute: function() {
+    let result = (this.totalSumCompute && typeof this.totalSumCompute === 'function') ? this.totalSumCompute() : null;
+    this.set('totalSum', result);
+  },
   manager: DS.belongsTo('i-i-s-shop-employee', { inverse: null, async: false }),
   orderItem: DS.hasMany('i-i-s-shop-order-item', { inverse: 'order', async: false })
 });
@@ -106,6 +129,10 @@ export let defineProjections = function (modelClass) {
     }, { index: -1, hidden: true }),
     totalSum: attr('Стоимость заказа', { index: 4 }),
     paymentDate: attr('Дата оплаты', { index: 5 }),
-    shipmentDate: attr('Дата отгрузки', { index: 6 })
+    shipmentDate: attr('Дата отгрузки', { index: 6 }),
+    orderItem: hasMany('i-i-s-shop-order-item', '', {
+      amount: attr('~', { index: 0, hidden: true }),
+      priceWTaxes: attr('~', { index: 1, hidden: true })
+    })
   });
 };

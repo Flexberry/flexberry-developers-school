@@ -28,6 +28,14 @@ export default {
       totalSum: {
         __caption__: 'totalSum'
       }
+    },
+    OrderItemInOrderL: {
+      amount: {
+        __caption__: 'amount'
+      },
+      priceWTaxes: {
+        __caption__: 'priceWTaxes'
+      }
     }
   },
   validations: {

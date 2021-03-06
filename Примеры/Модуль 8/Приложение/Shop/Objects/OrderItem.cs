@@ -45,6 +45,11 @@ namespace IIS.Shop
             "Product.Weight",
             "Product.Measure"})]
     [MasterViewDefineAttribute("OrderItemE", "Product", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Name")]
+    [View("OrderItemInOrderL", new string[] {
+            "Amount as \'\'",
+            "PriceWTaxes as \'\'"}, Hidden=new string[] {
+            "Amount",
+            "PriceWTaxes"})]
     public class OrderItem : ICSSoft.STORMNET.DataObject
     {
         
@@ -236,6 +241,17 @@ namespace IIS.Shop
                 get
                 {
                     return ICSSoft.STORMNET.Information.GetView("OrderItemE", typeof(IIS.Shop.OrderItem));
+                }
+            }
+            
+            /// <summary>
+            /// "OrderItemInOrderL" view.
+            /// </summary>
+            public static ICSSoft.STORMNET.View OrderItemInOrderL
+            {
+                get
+                {
+                    return ICSSoft.STORMNET.Information.GetView("OrderItemInOrderL", typeof(IIS.Shop.OrderItem));
                 }
             }
         }
