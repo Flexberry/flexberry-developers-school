@@ -62,8 +62,9 @@
       relationName="order"
       projection="OrderL"
       title=(t "forms.i-i-s-shop-invoice-e.order-caption")
-      readonly=readonly
+      readonly=(or readonly orderItemsLoading)
       componentName="orderLookup"
+      updateLookupAction="orderChanged"
     }}
     {{flexberry-validationmessage error=(v-get validationObject "order" "messages")}}
   </div>

@@ -1,6 +1,4 @@
 import $ from 'jquery';
-import Builder from 'ember-flexberry-data/query/builder';
-import generateUniqueId from 'ember-flexberry-data/utils/generate-unique-id';
 import { buildValidations } from 'ember-cp-validations';
 import { observer } from '@ember/object';
 import { once } from '@ember/runloop';
@@ -37,63 +35,6 @@ let Model = DocumentModel.extend(InvoiceMixin, Validations, {
       this.set('totalSum', result);
     }
   },
-
-  /*
-   * Список товаров к выдаче
-   */
-  _invoiceItemChanged: on('init', observer('order', function() {
-      once(this, '_invoiceItemCompute');
-  })),
-  _invoiceItemCompute: function() {
-    var me = this;
-
-    if (!this.get('isDeleted')) {
-      // Удаляем старые детейлы
-      let currentItems = me.get('invoiceItem');
-      currentItems.forEach(function (item) {
-        item.deleteRecord();
-      });
-
-      let order = me.get('order');
-      if (order) {
-        let store = this.get('store');
-        let orderId = order.get('id');
-
-        let builder = new Builder(store, 'i-i-s-shop-order');
-        builder.selectByProjection('OrderE');
-        builder.byId(orderId);
-
-        store.query('i-i-s-shop-order', builder.build())
-          .then(function (orders) {
-            orders.forEach(function(order) {
-              let items = order.get('orderItem');
-              items.forEach(function(item) {
-                let product = item.get('product');
-                let amount = Number(item.get('amount'));
-
-                let weight = Number(product.get('weight'));
-                let totalWeight = Number((weight * amount).toFixed(3));
-
-                // Создаем новый детейл
-                let invoiceItem = store.createRecord('i-i-s-shop-invoice-item', {
-                  id: generateUniqueId(),
-                  amount: amount,
-                  weight: totalWeight,
-                  price: item.get('priceWTaxes'),
-                  totalSum: item.get('totalSum'),
-                  product: product
-                });
-
-                // Добавляем детейл в список
-                me.get('invoiceItem').pushObject(invoiceItem);
-              });
-            });
-        });
-      } else {
-        this.set('totalWeight', 0);
-      }
-    }
-  }
 });
 
 defineBaseModel(Model);
