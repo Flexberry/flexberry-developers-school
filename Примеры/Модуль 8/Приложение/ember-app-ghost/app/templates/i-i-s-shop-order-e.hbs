@@ -1,0 +1,121 @@
+<h3 class="ui header">
+  {{t "forms.i-i-s-shop-order-e.caption"}}
+  {{#unless model.isNew}}
+    {{model.number}}
+  {{/unless}}
+</h3>
+
+<form class="ui form flexberry-vertical-form" role="form">
+  {{flexberry-error error=error}}
+  <div class="field">
+    <div class="sixteen wide">
+      {{flexberry-validationsummary errors=(v-get validationObject "messages")}}
+    </div>
+  </div>
+  <div class="field">
+    <div class="flexberry-edit-panel">
+      {{#unless model.isBlocked}}
+        <button class="ui button save-button" {{action "save"}}>
+          {{t "forms.edit-form.save-button-text"}}
+        </button>
+        {{#unless model.isNew}}
+          <button class="ui button save-del-button" {{action "delete"}}>
+            {{t "forms.edit-form.delete-button-text"}}
+          </button>
+        {{/unless}}
+      {{/unless}}
+      <button class="ui button close-button" {{action "close"}}>
+        {{t "forms.edit-form.close-button-text"}}
+      </button>
+    </div>
+  </div>
+  <div class="field">
+    <label>{{t "forms.i-i-s-shop-order-e.status-caption"}}</label>
+    {{flexberry-dropdown
+      items=(flexberry-enum "i-i-s-shop-order-status")
+      value=model.status
+      readonly=model.isBlocked
+    }}
+    {{flexberry-validationmessage error=(v-get validationObject "status" "messages")}}
+  </div>
+  <div class="field">
+    <label>{{t "forms.i-i-s-shop-order-e.createDate-caption"}}</label>
+    {{
+      flexberry-simpledatetime
+      type="date"
+      placeholder=(t 'components.flexberry-datepicker.placeholder')
+      readonly=true
+      value=model.createDate
+      class=(if (v-get validationObject "createDate" "isInvalid") "error")
+    }}
+    {{flexberry-validationmessage error=(v-get validationObject "createDate" "messages")}}
+  </div>
+
+  <div class="field">
+    <label>{{t "forms.i-i-s-shop-order-e.manager-caption"}}</label>
+    {{flexberry-lookup
+      choose="showLookupDialog"
+      remove="removeLookupValue"
+      value=model.manager
+      displayAttributeName="nameWInitials"
+      autocomplete=true
+      relationName="manager"
+      projection="EmployeeL"
+      title=(t "forms.i-i-s-shop-order-e.manager-caption")
+      readonly=model.isBlocked
+      lookupLimitPredicate=managerLimitPredicate
+      componentName="managerLookup"
+    }}
+    {{flexberry-validationmessage error=(v-get validationObject "manager" "messages")}}
+  </div>
+
+  <div class="field">
+    {{flexberry-field
+      readonly=true
+      value=model.totalSum
+      class=(if (v-get validationObject "totalSum" "isInvalid") "error")
+      label=(t "forms.i-i-s-shop-order-e.totalSum-caption")
+    }}
+    {{flexberry-validationmessage error=(v-get validationObject "totalSum" "messages")}}
+  </div>
+  <div class="field">
+    <label>{{t "forms.i-i-s-shop-order-e.paymentDate-caption"}}</label>
+    {{
+      flexberry-simpledatetime
+      type="date"
+      placeholder=(t 'components.flexberry-datepicker.placeholder')
+      readonly=model.isBlocked
+      value=model.paymentDate
+      class=(if (v-get validationObject "paymentDate" "isInvalid") "error")
+    }}
+    {{flexberry-validationmessage error=(v-get validationObject "paymentDate" "messages")}}
+  </div>
+
+  <div class="field">
+    <label>{{t "forms.i-i-s-shop-order-e.shipmentDate-caption"}}</label>
+    {{
+      flexberry-simpledatetime
+      type="date"
+      placeholder=(t 'components.flexberry-datepicker.placeholder')
+      readonly=model.isBlocked
+      value=model.shipmentDate
+      class=(if (v-get validationObject "shipmentDate" "isInvalid") "error")
+    }}
+    {{flexberry-validationmessage error=(v-get validationObject "shipmentDate" "messages")}}
+  </div>
+
+  <div class="field">
+    <label>{{t "forms.i-i-s-shop-order-e.orderItem-caption"}}</label>
+    {{flexberry-groupedit
+      componentName="orderItemGroupEdit"
+      mainModelProjection=modelProjection
+      modelProjection=modelProjection.attributes.orderItem
+      content=model.orderItem
+      readonly=model.isBlocked
+      orderable=false
+      configurateRow=(action "configurateOrderItemRow")
+      class=(if (v-get validationObject "orderItem" "isInvalid") "error")
+    }}
+    {{flexberry-validationmessage error=(v-get validationObject "orderItem" "messages")}}
+  </div>
+</form>
