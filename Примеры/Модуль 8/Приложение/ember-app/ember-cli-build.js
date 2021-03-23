@@ -1,13 +1,32 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const autoprefixer = require('autoprefixer');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     lessOptions: {
       paths: [
-        'bower_components/semantic-ui'
+          'bower_components/semantic-ui',
+          'node_modules/ember-flexberry-themes',
       ]
+    },
+    postcssOptions: {
+      compile: {
+        enabled: false,
+        browsers: ['last 3 versions'],
+      },
+      filter: {
+        enabled: true,
+        plugins: [
+          {
+            module: autoprefixer,
+            options: {
+              browsers: ['last 3 versions']
+            }
+          }
+        ]
+      }
     }
 
     // Add options here
@@ -25,6 +44,14 @@ module.exports = function(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+
+  app.import('vendor/guideline-icons.css');
+  app.import('vendor/fonts/guideline-icons/guideline-icons.eot', { destDir: 'assets/fonts/guideline-icons' });
+  app.import('vendor/fonts/guideline-icons/guideline-icons.ttf', { destDir: 'assets/fonts/guideline-icons' });
+  app.import('vendor/fonts/guideline-icons/guideline-icons.woff', { destDir: 'assets/fonts/guideline-icons' });
+  app.import('vendor/fonts/guideline-icons/guideline-icons.woff2', { destDir: 'assets/fonts/guideline-icons' });
+  app.import('vendor/fonts/guideline-icons/guideline-icons.svg', { destDir: 'assets/fonts/guideline-icons' });
+
   app.import('vendor/font-icon.css');
   app.import('vendor/fonts/icons.eot', { destDir: 'assets/fonts' });
   app.import('vendor/fonts/icons.otf', { destDir: 'assets/fonts' });
@@ -46,7 +73,6 @@ module.exports = function(defaults) {
   app.import('vendor/serviceImages/close-hover.png', { destDir: 'assets/themes/blue-sky/assets/images' });
   app.import('vendor/serviceImages/header-bgw.png', { destDir: 'assets/themes/orange/assets/images' });
   app.import('vendor/serviceImages/bgw-head-calendar.png', { destDir: 'assets/themes/orange/assets/images' });
-
 
   return app.toTree();
 };
