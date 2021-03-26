@@ -10,17 +10,16 @@
 
 namespace IIS.Shop
 {
+    using System;
+    using System.Xml;
+    
+    
+    // *** Start programmer edit section *** (Using statements)
+    using System.Collections;
+    using System.Collections.Generic;
     using ICSSoft.STORMNET;
     using ICSSoft.STORMNET.Business;
     using ICSSoft.STORMNET.FunctionalLanguage;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-
-
-    // *** Start programmer edit section *** (Using statements)
-
     // *** End programmer edit section *** (Using statements)
 
 
@@ -33,9 +32,8 @@ namespace IIS.Shop
     [ICSSoft.STORMNET.AccessType(ICSSoft.STORMNET.AccessType.none)]
     public class OrderBS : ICSSoft.STORMNET.Business.BusinessServer
     {
-
+        
         // *** Start programmer edit section *** (OrderBS CustomMembers)
-
         /// <summary>
 		/// Перевод заказа в статус "Оплачено"
 		/// </summary>
@@ -153,12 +151,11 @@ namespace IIS.Shop
 
         // *** End programmer edit section *** (OrderBS CustomMembers)
 
-
+        
         // *** Start programmer edit section *** (OnUpdateOrder CustomAttributes)
 
-
         // *** End programmer edit section *** (OnUpdateOrder CustomAttributes)
-        public virtual DataObject[] OnUpdateOrder(IIS.Shop.Order UpdatedObject)
+        public virtual ICSSoft.STORMNET.DataObject[] OnUpdateOrder(IIS.Shop.Order UpdatedObject)
         {
             // *** Start programmer edit section *** (OnUpdateOrder)
             DataObject[] result = new DataObject[0];
