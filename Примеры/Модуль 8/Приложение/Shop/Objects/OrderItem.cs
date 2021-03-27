@@ -59,8 +59,6 @@ namespace IIS.Shop
         
         private double fPriceWTaxes;
         
-        private double fTotalSum;
-        
         private IIS.Shop.Product fProduct;
         
         private IIS.Shop.Order fOrder;
@@ -138,28 +136,21 @@ namespace IIS.Shop
         // *** Start programmer edit section *** (OrderItem.TotalSum CustomAttributes)
 
         // *** End programmer edit section *** (OrderItem.TotalSum CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(SQLDataService), "@PriceWTaxes@ * @Amount@")]
         public virtual double TotalSum
         {
             get
             {
-                // *** Start programmer edit section *** (OrderItem.TotalSum Get start)
-
-                // *** End programmer edit section *** (OrderItem.TotalSum Get start)
-                double result = this.fTotalSum;
-                // *** Start programmer edit section *** (OrderItem.TotalSum Get end)
-
-                // *** End programmer edit section *** (OrderItem.TotalSum Get end)
-                return result;
+                // *** Start programmer edit section *** (OrderItem.TotalSum Get)
+                return PriceWTaxes * Amount;
+                // *** End programmer edit section *** (OrderItem.TotalSum Get)
             }
             set
             {
-                // *** Start programmer edit section *** (OrderItem.TotalSum Set start)
+                // *** Start programmer edit section *** (OrderItem.TotalSum Set)
 
-                // *** End programmer edit section *** (OrderItem.TotalSum Set start)
-                this.fTotalSum = value;
-                // *** Start programmer edit section *** (OrderItem.TotalSum Set end)
-
-                // *** End programmer edit section *** (OrderItem.TotalSum Set end)
+                // *** End programmer edit section *** (OrderItem.TotalSum Set)
             }
         }
         

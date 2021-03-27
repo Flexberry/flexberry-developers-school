@@ -52,8 +52,6 @@ CREATE TABLE OrderItem (
 
  PriceWTaxes DOUBLE PRECISION NULL,
 
- TotalSum DOUBLE PRECISION NULL,
-
  Товар UUID NULL,
 
  Order_m0 UUID NOT NULL,
