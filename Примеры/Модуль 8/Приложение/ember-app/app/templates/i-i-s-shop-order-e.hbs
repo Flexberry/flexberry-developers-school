@@ -112,7 +112,6 @@
       content=model.orderItem
       readonly=model.isBlocked
       orderable=false
-      configurateRow=(action "configurateOrderItemRow")
       class=(if (v-get validationObject "orderItem" "isInvalid") "error")
     }}
     {{flexberry-validationmessage error=(v-get validationObject "orderItem" "messages")}}
