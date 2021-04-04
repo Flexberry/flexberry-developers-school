@@ -22,6 +22,17 @@ export default {
       totalSum: {
         __caption__: 'totalSum'
       }
+    },
+    InvoiceItemInInvoiceL: {
+      price: {
+        __caption__: 'price'
+      },
+      amount: {
+        __caption__: 'amount'
+      },
+      weight: {
+        __caption__: 'weight'
+      }
     }
   },
   validations: {

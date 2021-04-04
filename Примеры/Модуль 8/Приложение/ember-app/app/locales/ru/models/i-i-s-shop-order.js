@@ -86,6 +86,15 @@ export default {
       },
       shipmentDate: {
         __caption__: 'Дата отгрузки'
+      },
+      orderItem: {
+        __caption__: '',
+        amount: {
+          __caption__: ''
+        },
+        priceWTaxes: {
+          __caption__: ''
+        }
       }
     }
   },

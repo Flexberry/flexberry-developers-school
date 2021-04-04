@@ -44,7 +44,7 @@
     },
     {
       "name": "price",
-      "type": "number",
+      "type": "decimal",
       "flexberryType": "double",
       "notNull": false,
       "defaultValue": "",
@@ -53,7 +53,7 @@
     },
     {
       "name": "weight",
-      "type": "number",
+      "type": "decimal",
       "flexberryType": "double",
       "notNull": false,
       "defaultValue": "",

@@ -104,6 +104,18 @@ export default {
         lastName: {
           __caption__: 'lastName'
         }
+      },
+      invoiceItem: {
+        __caption__: 'invoiceItem',
+        price: {
+          __caption__: 'price'
+        },
+        amount: {
+          __caption__: 'amount'
+        },
+        weight: {
+          __caption__: 'weight'
+        }
       }
     }
   },

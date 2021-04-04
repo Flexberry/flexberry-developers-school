@@ -28,6 +28,14 @@ export default {
       totalSum: {
         __caption__: 'Сумма по позиции'
       }
+    },
+    OrderItemInOrderL: {
+      amount: {
+        __caption__: ''
+      },
+      priceWTaxes: {
+        __caption__: ''
+      }
     }
   },
   validations: {

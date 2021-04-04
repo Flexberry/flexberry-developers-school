@@ -128,6 +128,7 @@
     <Compile Include="OrderBS.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="OrderItemBS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
   </ItemGroup>
