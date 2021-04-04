@@ -14,7 +14,7 @@ export let Model = Mixin.create({
 
     @property totalSum
   */
-  totalSum: DS.attr('number'),
+  totalSum: DS.attr('decimal'),
   /**
     Method to set non-stored property.
     Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.
@@ -38,7 +38,7 @@ export let Model = Mixin.create({
 
     @property totalWeight
   */
-  totalWeight: DS.attr('number'),
+  totalWeight: DS.attr('decimal'),
   /**
     Method to set non-stored property.
     Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.

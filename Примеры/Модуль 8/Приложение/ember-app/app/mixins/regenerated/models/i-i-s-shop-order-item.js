@@ -8,13 +8,13 @@ import { computed } from '@ember/object';
 
 export let Model = Mixin.create({
   amount: DS.attr('number'),
-  priceWTaxes: DS.attr('number'),
+  priceWTaxes: DS.attr('decimal'),
   /**
     Non-stored property.
 
     @property totalSum
   */
-  totalSum: DS.attr('number'),
+  totalSum: DS.attr('decimal'),
   /**
     Method to set non-stored property.
     Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.

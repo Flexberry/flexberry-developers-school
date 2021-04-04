@@ -6,14 +6,14 @@ import { attr, belongsTo, hasMany } from 'ember-flexberry-data/utils/attributes'
 
 export let Model = Mixin.create({
   amount: DS.attr('number'),
-  weight: DS.attr('number'),
-  price: DS.attr('number'),
+  weight: DS.attr('decimal'),
+  price: DS.attr('decimal'),
   /**
     Non-stored property.
 
     @property totalSum
   */
-  totalSum: DS.attr('number'),
+  totalSum: DS.attr('decimal'),
   /**
     Method to set non-stored property.
     Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.
