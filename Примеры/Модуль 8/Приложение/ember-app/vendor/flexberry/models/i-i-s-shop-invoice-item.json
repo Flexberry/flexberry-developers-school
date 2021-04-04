@@ -39,7 +39,7 @@
       "flexberryType": "double",
       "notNull": false,
       "defaultValue": "",
-      "stored": true,
+      "stored": false,
       "ordered": false
     }
   ],

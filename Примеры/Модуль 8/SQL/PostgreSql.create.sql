@@ -156,8 +156,6 @@ CREATE TABLE InvoiceItem (
 
  Price DOUBLE PRECISION NULL,
 
- TotalSum DOUBLE PRECISION NULL,
-
  Товар UUID NULL,
 
  Накладная UUID NOT NULL,
