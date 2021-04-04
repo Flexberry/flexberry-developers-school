@@ -29,12 +29,11 @@ export default EditFormController.extend({
           const invoiceItems = orderItems.map((orderItem) => {
             const id = generateUniqueId();
             const price = orderItem.get('priceWTaxes');
-            const totalSum = orderItem.get('totalSum');
             const product = orderItem.get('product');
             const amount = Number(orderItem.get('amount'));
             const weight = Number(product.get('weight')) * amount;
 
-            return store.createRecord('i-i-s-shop-invoice-item', { id, amount, weight, price, totalSum, product, invoice });
+            return store.createRecord('i-i-s-shop-invoice-item', { id, amount, weight, price, product, invoice });
           });
 
           invoice.get('invoiceItem').pushObjects(invoiceItems);
@@ -62,6 +61,10 @@ export default EditFormController.extend({
           break;
 
       }
+    }
+
+    if (bindingPath === 'totalSum') {
+      cellComponent.componentName = 'invoice-item/total-sum';
     }
 
     return cellComponent;
