@@ -42,9 +42,11 @@ namespace IIS.Shop
     [MasterViewDefineAttribute("InvoiceItemE", "Product", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Name")]
     [View("InvoiceItemInInvoiceL", new string[] {
             "Price as \'\'",
-            "Amount as \'\'"}, Hidden=new string[] {
+            "Amount as \'\'",
+            "Weight as \'\'"}, Hidden=new string[] {
             "Price",
-            "Amount"})]
+            "Amount",
+            "Weight"})]
     public class InvoiceItem : ICSSoft.STORMNET.DataObject
     {
         

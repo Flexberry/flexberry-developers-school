@@ -33,7 +33,30 @@ export let Model = Mixin.create({
     let result = (this.totalSumCompute && typeof this.totalSumCompute === 'function') ? this.totalSumCompute() : null;
     this.set('totalSum', result);
   },
+  /**
+    Non-stored property.
+
+    @property totalWeight
+  */
   totalWeight: DS.attr('number'),
+  /**
+    Method to set non-stored property.
+    Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.
+    Please, implement 'totalWeightCompute' method in model class (outside of this mixin) if you want to compute value of 'totalWeight' property.
+
+    @method _totalWeightCompute
+    @private
+    @example
+      ```javascript
+      _totalWeightChanged: on('init', observer('totalWeight', function() {
+        once(this, '_totalWeightCompute');
+      }))
+      ```
+  */
+  _totalWeightCompute: function() {
+    let result = (this.totalWeightCompute && typeof this.totalWeightCompute === 'function') ? this.totalWeightCompute() : null;
+    this.set('totalWeight', result);
+  },
   note: DS.attr('string'),
   customerName: DS.attr('string'),
   order: DS.belongsTo('i-i-s-shop-order', { inverse: null, async: false }),
@@ -161,7 +184,8 @@ export let defineProjections = function (modelClass) {
     }, { index: -1, hidden: true }),
     invoiceItem: hasMany('i-i-s-shop-invoice-item', '', {
       price: attr('~', { index: 0, hidden: true }),
-      amount: attr('~', { index: 1, hidden: true })
+      amount: attr('~', { index: 1, hidden: true }),
+      weight: attr('~', { index: 2, hidden: true })
     })
   });
 };

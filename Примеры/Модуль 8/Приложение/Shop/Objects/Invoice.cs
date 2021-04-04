@@ -74,8 +74,6 @@ namespace IIS.Shop
         
         private System.DateTime? fShipmentDateTime;
         
-        private double fTotalWeight;
-        
         private string fNote;
         
         private string fCustomerName;
@@ -195,28 +193,33 @@ namespace IIS.Shop
         // *** Start programmer edit section *** (Invoice.TotalWeight CustomAttributes)
 
         // *** End programmer edit section *** (Invoice.TotalWeight CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(SQLDataService), "SELECT SUM(Weight) FROM InvoiceItem WHERE InvoiceItem.Накладная = STORMMainObject" +
+            "Key")]
         public virtual double TotalWeight
         {
             get
             {
-                // *** Start programmer edit section *** (Invoice.TotalWeight Get start)
+                // *** Start programmer edit section *** (Invoice.TotalWeight Get)
+                if (!CheckLoadedProperty(nameof(InvoiceItem)))
+                {
+                    throw new InvalidOperationException($"The '{nameof(InvoiceItem)}' property not loaded.");
+                }
 
-                // *** End programmer edit section *** (Invoice.TotalWeight Get start)
-                double result = this.fTotalWeight;
-                // *** Start programmer edit section *** (Invoice.TotalWeight Get end)
+                double weight = 0;
+                foreach (InvoiceItem item in InvoiceItem)
+                {
+                    weight += item.Weight;
+                }
 
-                // *** End programmer edit section *** (Invoice.TotalWeight Get end)
-                return result;
+                return weight;
+                // *** End programmer edit section *** (Invoice.TotalWeight Get)
             }
             set
             {
-                // *** Start programmer edit section *** (Invoice.TotalWeight Set start)
+                // *** Start programmer edit section *** (Invoice.TotalWeight Set)
 
-                // *** End programmer edit section *** (Invoice.TotalWeight Set start)
-                this.fTotalWeight = value;
-                // *** Start programmer edit section *** (Invoice.TotalWeight Set end)
-
-                // *** End programmer edit section *** (Invoice.TotalWeight Set end)
+                // *** End programmer edit section *** (Invoice.TotalWeight Set)
             }
         }
         

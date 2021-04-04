@@ -41,8 +41,6 @@ export default EditFormController.extend({
         }).finally(() => {
           this.set('orderItemsLoading', false);
         });
-      } else {
-        invoice.set('totalWeight', 0);
       }
     }
   },

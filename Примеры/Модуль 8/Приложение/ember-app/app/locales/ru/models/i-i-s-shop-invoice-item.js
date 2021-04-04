@@ -29,6 +29,9 @@ export default {
       },
       amount: {
         __caption__: '~'
+      },
+      weight: {
+        __caption__: '~'
       }
     }
   },

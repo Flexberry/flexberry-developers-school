@@ -136,6 +136,12 @@
           "caption": "~",
           "hidden": true,
           "index": 1
+        },
+        {
+          "name": "weight",
+          "caption": "~",
+          "hidden": true,
+          "index": 2
         }
       ],
       "belongsTo": [],

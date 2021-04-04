@@ -29,6 +29,9 @@ export default {
       },
       amount: {
         __caption__: 'amount'
+      },
+      weight: {
+        __caption__: 'weight'
       }
     }
   },
