@@ -28,6 +28,17 @@ let Model = DocumentModel.extend(InvoiceMixin, Validations, {
       return sum + price * amount;
     }, 0);
   }),
+
+  actualTotalWeight: computed('invoiceItem.@each.weight', function() {
+    return this.get('invoiceItem').reduce((sum, item) => {
+      const weight = Number(item.get('weight') || 0);
+      if (Number.isNaN(weight)) {
+        throw new Error(`Invalid 'weight' for invoice item: '${item}'.`);
+      }
+
+      return sum + weight;
+    }, 0);
+  }),
 });
 
 defineBaseModel(Model);

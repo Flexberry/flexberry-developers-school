@@ -88,11 +88,9 @@
   <div class="field">
     {{flexberry-field
       readonly=true
-      value=model.totalWeight
-      class=(if (v-get validationObject "totalWeight" "isInvalid") "error")
+      value=model.actualTotalWeight
       label=(t "forms.i-i-s-shop-invoice-e.totalWeight-caption")
     }}
-    {{flexberry-validationmessage error=(v-get validationObject "totalWeight" "messages")}}
   </div>
   <div class="field">
     {{flexberry-field
