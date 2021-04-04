@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import { buildValidations } from 'ember-cp-validations';
-import { observer } from '@ember/object';
-import { once } from '@ember/runloop';
-import { on } from '@ember/object/evented';
+import { computed } from '@ember/object';
 
 import {
   defineBaseModel,
@@ -19,22 +17,17 @@ const Validations = buildValidations($.extend({}, ParentValidationRules, Validat
 });
 
 let Model = DocumentModel.extend(InvoiceMixin, Validations, {
-  /*
-   * Сумма заказа
-   */
-  _totalSumChanged: on('init', observer('order', function() {
-    once(this, '_totalSumCompute');
-  })),
-  _totalSumCompute: function() {
-    let order = this.get('order');
-    let result = 0;
-    if (order) {
-      result = order.get('totalSum');
-    }
-    if (!this.get('isDeleted')) {
-      this.set('totalSum', result);
-    }
-  },
+  actualTotalSum: computed('invoiceItem.@each.{amount,price}', function() {
+    return this.get('invoiceItem').reduce((sum, item) => {
+      const price = Number(item.get('price') || 0);
+      const amount = Number(item.get('amount') || 0);
+      if (Number.isNaN(price) || Number.isNaN(amount)) {
+        throw new Error(`Invalid 'price' or 'amount' for invoice item: '${item}'.`);
+      }
+
+      return sum + price * amount;
+    }, 0);
+  }),
 });
 
 defineBaseModel(Model);

@@ -81,11 +81,9 @@
   <div class="field">
     {{flexberry-field
       readonly=true
-      value=model.totalSum
-      class=(if (v-get validationObject "totalSum" "isInvalid") "error")
+      value=model.actualTotalSum
       label=(t "forms.i-i-s-shop-invoice-e.totalSum-caption")
     }}
-    {{flexberry-validationmessage error=(v-get validationObject "totalSum" "messages")}}
   </div>
   <div class="field">
     {{flexberry-field
