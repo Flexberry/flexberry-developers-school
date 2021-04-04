@@ -30,7 +30,7 @@
       "flexberryType": "double",
       "notNull": false,
       "defaultValue": "",
-      "stored": true,
+      "stored": false,
       "ordered": false
     },
     {
@@ -307,7 +307,15 @@
           "inverse": null
         }
       ],
-      "hasMany": []
+      "hasMany": [
+        {
+          "projectionName": "InvoiceItemInInvoiceL",
+          "caption": "",
+          "name": "invoiceItem",
+          "relatedTo": "i-i-s-shop-invoice-item",
+          "inverse": null
+        }
+      ]
     }
   ],
   "stored": true,

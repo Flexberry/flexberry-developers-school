@@ -67,8 +67,6 @@ CREATE TABLE Invoice (
 
  ShipmentDateTime TIMESTAMP(3) NULL,
 
- TotalSum DOUBLE PRECISION NULL,
-
  TotalWeight DOUBLE PRECISION NULL,
 
  Note VARCHAR(255) NULL,

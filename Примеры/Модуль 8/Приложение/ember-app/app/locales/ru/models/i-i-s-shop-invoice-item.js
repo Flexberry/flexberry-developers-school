@@ -22,6 +22,14 @@ export default {
       totalSum: {
         __caption__: 'Сумма по позиции'
       }
+    },
+    InvoiceItemInInvoiceL: {
+      price: {
+        __caption__: '~'
+      },
+      amount: {
+        __caption__: '~'
+      }
     }
   },
   validations: {

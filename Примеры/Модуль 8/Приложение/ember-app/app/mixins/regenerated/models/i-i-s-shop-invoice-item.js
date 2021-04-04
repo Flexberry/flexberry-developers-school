@@ -68,4 +68,9 @@ export let defineProjections = function (modelClass) {
     price: attr('Цена', { index: 5 }),
     totalSum: attr('Сумма по позиции', { index: 6 })
   });
+
+  modelClass.defineProjection('InvoiceItemInInvoiceL', 'i-i-s-shop-invoice-item', {
+    price: attr('~', { index: 0, hidden: true }),
+    amount: attr('~', { index: 1, hidden: true })
+  });
 };

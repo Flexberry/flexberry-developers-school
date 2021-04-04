@@ -40,6 +40,11 @@ namespace IIS.Shop
             "Product.Name",
             "Product.ProductCode"})]
     [MasterViewDefineAttribute("InvoiceItemE", "Product", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Name")]
+    [View("InvoiceItemInInvoiceL", new string[] {
+            "Price as \'\'",
+            "Amount as \'\'"}, Hidden=new string[] {
+            "Price",
+            "Amount"})]
     public class InvoiceItem : ICSSoft.STORMNET.DataObject
     {
         
@@ -266,6 +271,17 @@ namespace IIS.Shop
                 get
                 {
                     return ICSSoft.STORMNET.Information.GetView("InvoiceItemE", typeof(IIS.Shop.InvoiceItem));
+                }
+            }
+            
+            /// <summary>
+            /// "InvoiceItemInInvoiceL" view.
+            /// </summary>
+            public static ICSSoft.STORMNET.View InvoiceItemInInvoiceL
+            {
+                get
+                {
+                    return ICSSoft.STORMNET.Information.GetView("InvoiceItemInInvoiceL", typeof(IIS.Shop.InvoiceItem));
                 }
             }
         }

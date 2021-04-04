@@ -9,7 +9,30 @@ import { computed } from '@ember/object';
 export let Model = Mixin.create({
   status: DS.attr('i-i-s-shop-invoice-status', { defaultValue: InvoiceStatusEnum.New }),
   shipmentDateTime: DS.attr('date'),
+  /**
+    Non-stored property.
+
+    @property totalSum
+  */
   totalSum: DS.attr('number'),
+  /**
+    Method to set non-stored property.
+    Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.
+    Please, implement 'totalSumCompute' method in model class (outside of this mixin) if you want to compute value of 'totalSum' property.
+
+    @method _totalSumCompute
+    @private
+    @example
+      ```javascript
+      _totalSumChanged: on('init', observer('totalSum', function() {
+        once(this, '_totalSumCompute');
+      }))
+      ```
+  */
+  _totalSumCompute: function() {
+    let result = (this.totalSumCompute && typeof this.totalSumCompute === 'function') ? this.totalSumCompute() : null;
+    this.set('totalSum', result);
+  },
   totalWeight: DS.attr('number'),
   note: DS.attr('string'),
   customerName: DS.attr('string'),
@@ -135,6 +158,10 @@ export let defineProjections = function (modelClass) {
     shipmentDateTime: attr('Дата и время отгрузки', { index: 8 }),
     responsiblePerson: belongsTo('i-i-s-shop-employee', 'Товар выдал', {
       lastName: attr('Товар выдал', { index: 9 })
-    }, { index: -1, hidden: true })
+    }, { index: -1, hidden: true }),
+    invoiceItem: hasMany('i-i-s-shop-invoice-item', '', {
+      price: attr('~', { index: 0, hidden: true }),
+      amount: attr('~', { index: 1, hidden: true })
+    })
   });
 };

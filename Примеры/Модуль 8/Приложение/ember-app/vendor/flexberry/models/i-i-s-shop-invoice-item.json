@@ -120,6 +120,26 @@
         }
       ],
       "hasMany": []
+    },
+    {
+      "name": "InvoiceItemInInvoiceL",
+      "modelName": "i-i-s-shop-invoice-item",
+      "attrs": [
+        {
+          "name": "price",
+          "caption": "~",
+          "hidden": true,
+          "index": 0
+        },
+        {
+          "name": "amount",
+          "caption": "~",
+          "hidden": true,
+          "index": 1
+        }
+      ],
+      "belongsTo": [],
+      "hasMany": []
     }
   ],
   "stored": true,
