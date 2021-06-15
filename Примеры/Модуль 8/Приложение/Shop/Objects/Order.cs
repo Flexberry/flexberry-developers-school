@@ -176,8 +176,8 @@ namespace IIS.Shop
 
         // *** End programmer edit section *** (Order.TotalSum CustomAttributes)
         [ICSSoft.STORMNET.NotStored()]
-        [DataServiceExpression(typeof(SQLDataService), "SELECT SUM(PriceWTaxes * Amount) FROM OrderItem WHERE OrderItem.Order_m0 = STORMM" +
-            "ainObjectKey")]
+        [DataServiceExpression(typeof(SQLDataService), "SELECT SUM(PriceWTaxes * Amount) FROM OrderItem WHERE OrderItem.Заказ = STORMMain" +
+            "ObjectKey")]
         public virtual double TotalSum
         {
             get
