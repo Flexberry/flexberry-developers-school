@@ -1,0 +1,15 @@
+{
+  "books": [
+    {
+      "name": "dfg",
+      "fio": "fdgfg",
+      "pagesCount": "22",
+      "url": "https://yandex.ru/",
+      "tags": [
+        "d"
+      ],
+      "id": 1,
+      "coverURL": "/public/Avatarka-1629951298131.jpg"
+    }
+  ]
+}
