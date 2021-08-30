@@ -22,6 +22,15 @@
       {{/each}}
     </ul>
   {{/if}}
+
+  <h4>Pages</h4>
+  <ul class="collection">
+    {{#each pages as |page|}}
+      <li>
+        {{link-to page "book" (query-params page=page)}}
+      </li>
+    {{/each}}
+  </ul>
 </div>
 
 {{outlet class="slide-container"}}
