@@ -11,13 +11,24 @@
 <div class="panel-content">
   <h3 class="panel-title">Books</h3>
 
+  {{#power-select
+    options=model.authors
+    selected=selectedAuthor
+    onchange=(action "changeAuthor")
+    searchField="fullName"
+    allowClear=true
+    as |author|
+  }}
+    {{author.fullName}}
+  {{/power-select}}
+
   {{#if isLoading}}
     <div class="welcome-page">
       <img src="/loading.gif" alt="Error">
     </div>
   {{else}}
     <ul class="collection">
-      {{#each model as |book|}}
+      {{#each model.books as |book|}}
         {{book-item title=book.title isbn=book.isbn bookId=book.id tagName='li' }}
       {{/each}}
     </ul>
