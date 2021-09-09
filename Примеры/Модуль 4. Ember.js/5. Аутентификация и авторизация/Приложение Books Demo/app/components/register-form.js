@@ -1,6 +1,8 @@
 import Component from '@ember/component';
 
 export default Component.extend({
+  iAmRobot: true,
+
   actions: {
     async saveUser(e) {
       e.preventDefault();
