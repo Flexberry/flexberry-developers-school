@@ -5,11 +5,15 @@ const jsonServer = require('json-server')
 const jwt = require("jsonwebtoken");
 // eslint-disable-next-line no-undef
 const crypto = require('crypto');
+const fetch = require('node-fetch');
 const server = jsonServer.create()
 const router = jsonServer.router('./tests/test-data/db.json')
 const middlewares = jsonServer.defaults()
 const secretKey = '09f26e402586e2faa8da4c98a35f1b20d6b033c6097befa8be3486a829587fe2f90a832bd3ff9d42710a4da095a2ce285b009f0c3730cd9b8e1af3eb84df6611';
 const hashingSecret = "f844b09ff50c";
+
+const RECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
+const RECAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
 
 const generateAccessToken = (userData) => {
   // expires after half and hour (1800 seconds = 30 minutes)
@@ -49,7 +53,7 @@ const getBaseRoute = (req) => {
 
 const isAuthorized = (req) => {
   const baseRoute = getBaseRoute(req);
-  if (req.path === '/users' || req.path === '/token' || ((baseRoute === 'authors' || baseRoute === 'books' || baseRoute === 'reviews') && req.method === 'GET')) {
+  if (req.path === '/recaptcha' || req.path === '/users' || req.path === '/token' || ((baseRoute === 'authors' || baseRoute === 'books' || baseRoute === 'reviews') && req.method === 'GET')) {
     return 200;
   }
 
@@ -175,6 +179,20 @@ server.use((req, res, next) => {
   }
   else {
     // Continue to JSON Server router
+    next();
+  }
+});
+
+server.use(async (request, response, next) => {
+  if (request.path === '/recaptcha' && request.query.key) {
+    const { success } = await (await fetch(RECAPTCHA_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: `secret=${RECAPTCHA_SECRET}&response=${request.query.key}`,
+    })).json();
+
+    response.json({ success });
+  } else {
     next();
   }
 });

@@ -37,8 +37,9 @@
 
   <div class="field">
     {{g-recaptcha-v2
-      verified=(action set "iAmRobot" false)
-      expired=(action set "iAmRobot" true)
+      verified=(action "verified")
+      expired=(action "expired")
+      reset=reset
     }}
   </div>
 
