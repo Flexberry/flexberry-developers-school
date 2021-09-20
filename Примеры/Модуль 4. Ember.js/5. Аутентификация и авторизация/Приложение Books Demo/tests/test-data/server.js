@@ -204,8 +204,23 @@ function responseInterceptor(req, res, next) {
 
 server.use(responseInterceptor);
 
+server.use((request, response, next) => {
+  const author = Number(request.query.author);
+  if (request.method === 'GET' && request.path === '/books' && !Number.isNaN(author)) {
+    const books = router.db.get('books').filter((b) => b.authorId === author).map((book) => {
+      book.reviews = router.db.get('reviews').filter((r) => r.bookId === book.id).value();
+
+      return book;
+    }).value();
+
+    response.json(books);
+  } else {
+    next();
+  }
+});
+
 // Use default router
-server.use(router)
+server.use(router);
 
 let port = 3000;
 server.listen(port, () => {
