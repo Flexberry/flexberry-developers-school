@@ -25,31 +25,35 @@ export default Component.extend({
       this.uploadDataChanged(uploadData);
     };
 
-    // Initialize jQuery fileupload plugin (https://github.com/blueimp/jQuery-File-Upload/wiki/API).
-    this.$('.custom-file-input').fileupload({
-      // Disable autoUpload.
-      autoUpload: false,
+    if (!this.$('.custom-file-input').fileupload('instance')) {
+      // Initialize jQuery fileupload plugin (https://github.com/blueimp/jQuery-File-Upload/wiki/API).
+      this.$('.custom-file-input').fileupload({
+        // Disable autoUpload.
+        autoUpload: false,
 
-      // Type of data that is expected back from the server.
-      dataType: 'json',
+        // Type of data that is expected back from the server.
+        dataType: 'json',
 
-      // Maximum number of files to be selected and uploaded.
-      maxNumberOfFiles: 1,
+        // Maximum number of files to be selected and uploaded.
+        maxNumberOfFiles: 1,
 
-      // Enable single file uploads.
-      singleFileUploads: true,
+        // Enable single file uploads.
+        singleFileUploads: true,
 
-      // Disable drag&drop file adding.
-      dropZone: null,
+        // Disable drag&drop file adding.
+        dropZone: null,
 
-      // File add handler.
-      add: onFileAdd
-    });
+        // File add handler.
+        add: onFileAdd
+      });
+    }
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    this.$('.custom-file-input').fileupload('destroy');
+    if (this.$('.custom-file-input').fileupload('instance')) {
+      this.$('.custom-file-input').fileupload('destroy');
+    }
   },
 
   actions: {

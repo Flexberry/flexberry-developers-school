@@ -38,7 +38,12 @@
     </div>
     <div class="form-group row">
       <div class="col-6">
-        <button type="submit" class="btn btn-outline-primary btn-lg">Сохранить</button>
+        <button type="submit" class="btn btn-outline-primary btn-lg">
+          Сохранить
+          {{#if isUploadingFile}}
+            <img src="/images/ajax-loader.gif">
+          {{/if}}
+        </button>
       </div>
       <div class="col-6 text-right">
         <button type="button" class="btn btn-outline-secondary btn-lg" onclick={{action "goToTemp"}}>Отмена</button>

@@ -3,17 +3,19 @@ import ENV from 'files/config/environment';
 // import { getOwner } from '@ember/application';
 
 export default Service.extend({
-  getBooks(search) {
+  async getBooks(search) {
     let queryParams = '';
     if (search) {
       queryParams = `?q=${search}`;
     }
 
-    return fetch(`${ENV.backendURL}/books${queryParams}`).then((response) => response.json());
+    const response = await fetch(`${ENV.backendURL}/books${queryParams}`);
+    return await response.json();
   },
 
-  getBook(id) {
-    return fetch(`${ENV.backendURL}/books/${id}`).then((response) => response.json());
+  async getBook(id) {
+    const response = await fetch(`${ENV.backendURL}/books/${id}`);
+    return await response.json();
   },
 
   deleteBook(book) {
@@ -33,6 +35,10 @@ export default Service.extend({
 
         const savedBook = await savedBookPromise.json();
 
+        if (!uploadData) {
+          resolve();
+        }
+
         uploadData.url = `${ENV.fileUploadURL}`;
         // uploadData.headers = getOwner(this).lookup('adapter:application').get('headers');
         uploadData.submit().done(async (result/*, textStatus, jqXhr*/) => {
@@ -51,6 +57,7 @@ export default Service.extend({
               body: JSON.stringify(dataToUpload)
             });
 
+            // eslint-disable-next-line no-console
             console.log('Ok');
             resolve();
           }

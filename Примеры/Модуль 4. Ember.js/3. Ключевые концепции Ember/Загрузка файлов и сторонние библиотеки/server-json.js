@@ -5,7 +5,7 @@ const multer = require('multer');
 const fs = require("fs");
 
 const pathToSave = 'public/uploads';
-const urlBase = '/public/';
+const urlBase = '/uploads/';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (!fs.existsSync(path.join(__dirname, pathToSave))) {
