@@ -35,7 +35,15 @@
     {{/each}}
   </div>
 
+  <div class="field">
+    {{g-recaptcha-v2
+      verified=(action "verified")
+      expired=(action "expired")
+      reset=reset
+    }}
+  </div>
+
   <div class="form-footer">
-    <button type="submit" class="btn-submit">save</button>
+    <button type="submit" class="btn-submit" disabled={{iAmRobot}}>save</button>
   </div>
 </form>
