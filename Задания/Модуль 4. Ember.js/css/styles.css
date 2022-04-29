@@ -161,19 +161,19 @@ a.tag-link:hover {
 /* Bootstrap dropdown styles
 -------------------------------------------------- */
 
-.dropdown .dropdown-toggle {
+.dropdown:not(.bootstrap-select) .dropdown-toggle {
   text-align: justify;
   white-space: normal;
   height: calc(1.5em + 0.75rem + 2px);
   border: 1px solid #ced4da;
 }
 
-.dropdown .dropdown-toggle span {
+.dropdown:not(.bootstrap-select) .dropdown-toggle span {
   display: inline-block;
   position: relative;
 }
 
-.dropdown .dropdown-toggle span.caret {
+.dropdown:not(.bootstrap-select) .dropdown-toggle span.caret {
   border-top: 0.3em solid;
   border-right: 0.3em solid transparent;
   border-bottom: 0;
@@ -181,13 +181,13 @@ a.tag-link:hover {
   vertical-align: 0.255em;
 }
 
-.dropdown-toggle:before {
+.dropdown:not(.bootstrap-select) .dropdown-toggle:before {
   content: '';
   width: 100%;
   height: 0;
 }
 
-.dropdown-toggle::after {
+.dropdown:not(.bootstrap-select) .dropdown-toggle::after {
   width: 100%;
   height: 0;
   visibility: hidden;
@@ -195,6 +195,12 @@ a.tag-link:hover {
   content: '';
   display: inline-block;
 }
+
+.dropdown.bootstrap-select .dropdown-toggle {
+  white-space: normal;
+  border: 1px solid #ced4da;
+}
+
 
 /* Signin form styles
 -------------------------------------------------- */
