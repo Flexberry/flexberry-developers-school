@@ -22,7 +22,7 @@ export default Component.extend({
       // const hasFiles = uploadData.files.length > 0;
       // const fileName = hasFiles ? uploadData.files[0].name : 'Выберите файл';
       // this.set('fileName', fileName);
-      this.uploadDataChanged(uploadData);
+      this.get('uploadDataChanged')(uploadData);
     };
 
     if (!this.$('.custom-file-input').fileupload('instance')) {
