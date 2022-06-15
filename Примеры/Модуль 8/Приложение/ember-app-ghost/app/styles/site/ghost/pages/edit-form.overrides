@@ -1,0 +1,9 @@
+.flexberry-edit-panel .ui.button.save-button,
+.flexberry-edit-panel .ui.button.save-close-button,
+.flexberry-edit-panel .ui.button.save-del-button {
+  box-shadow: 0 0 1px 1px @inputBackground;
+}
+
+.flexberry-edit-panel .ui.button:first-child {
+  padding-left: 0.857143em;
+}
