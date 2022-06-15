@@ -56,6 +56,8 @@ namespace IIS.Shop
             "TotalSum as \'Стоимость заказа\'",
             "PaymentDate as \'Дата оплаты\'",
             "ShipmentDate as \'Дата отгрузки\'"})]
+    [AssociatedDetailViewAttribute("OrderL", "OrderItem", "OrderItemInOrderL", true, "", "", false, new string[] {
+            ""})]
     public class Order : IIS.Shop.Document
     {
         
@@ -64,8 +66,6 @@ namespace IIS.Shop
         private System.DateTime? fShipmentDate;
         
         private System.DateTime? fPaymentDate;
-        
-        private double fTotalSum;
         
         private IIS.Shop.Employee fManager;
         
@@ -175,28 +175,33 @@ namespace IIS.Shop
         // *** Start programmer edit section *** (Order.TotalSum CustomAttributes)
 
         // *** End programmer edit section *** (Order.TotalSum CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(SQLDataService), "SELECT SUM(PriceWTaxes * Amount) FROM OrderItem WHERE OrderItem.Заказ = STORMMain" +
+            "ObjectKey")]
         public virtual double TotalSum
         {
             get
             {
-                // *** Start programmer edit section *** (Order.TotalSum Get start)
+                // *** Start programmer edit section *** (Order.TotalSum Get)
+                if (!CheckLoadedProperty(nameof(OrderItem)))
+                {
+                    throw new InvalidOperationException($"The '{nameof(OrderItem)}' property not loaded.");
+                }
 
-                // *** End programmer edit section *** (Order.TotalSum Get start)
-                double result = this.fTotalSum;
-                // *** Start programmer edit section *** (Order.TotalSum Get end)
+                double sum = 0;
+                foreach (OrderItem item in OrderItem)
+                {
+                    sum += item.PriceWTaxes * item.Amount;
+                }
 
-                // *** End programmer edit section *** (Order.TotalSum Get end)
-                return result;
+                return sum;
+                // *** End programmer edit section *** (Order.TotalSum Get)
             }
             set
             {
-                // *** Start programmer edit section *** (Order.TotalSum Set start)
+                // *** Start programmer edit section *** (Order.TotalSum Set)
 
-                // *** End programmer edit section *** (Order.TotalSum Set start)
-                this.fTotalSum = value;
-                // *** Start programmer edit section *** (Order.TotalSum Set end)
-
-                // *** End programmer edit section *** (Order.TotalSum Set end)
+                // *** End programmer edit section *** (Order.TotalSum Set)
             }
         }
         

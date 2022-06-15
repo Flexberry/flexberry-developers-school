@@ -62,8 +62,9 @@
       relationName="order"
       projection="OrderL"
       title=(t "forms.i-i-s-shop-invoice-e.order-caption")
-      readonly=readonly
+      readonly=(or readonly orderItemsLoading)
       componentName="orderLookup"
+      updateLookupAction="orderChanged"
     }}
     {{flexberry-validationmessage error=(v-get validationObject "order" "messages")}}
   </div>
@@ -80,20 +81,16 @@
   <div class="field">
     {{flexberry-field
       readonly=true
-      value=model.totalSum
-      class=(if (v-get validationObject "totalSum" "isInvalid") "error")
+      value=model.actualTotalSum
       label=(t "forms.i-i-s-shop-invoice-e.totalSum-caption")
     }}
-    {{flexberry-validationmessage error=(v-get validationObject "totalSum" "messages")}}
   </div>
   <div class="field">
     {{flexberry-field
       readonly=true
-      value=model.totalWeight
-      class=(if (v-get validationObject "totalWeight" "isInvalid") "error")
+      value=model.actualTotalWeight
       label=(t "forms.i-i-s-shop-invoice-e.totalWeight-caption")
     }}
-    {{flexberry-validationmessage error=(v-get validationObject "totalWeight" "messages")}}
   </div>
   <div class="field">
     {{flexberry-field

@@ -8,8 +8,31 @@ import { computed } from '@ember/object';
 
 export let Model = Mixin.create({
   amount: DS.attr('number'),
-  priceWTaxes: DS.attr('number'),
-  totalSum: DS.attr('number'),
+  priceWTaxes: DS.attr('decimal'),
+  /**
+    Non-stored property.
+
+    @property totalSum
+  */
+  totalSum: DS.attr('decimal'),
+  /**
+    Method to set non-stored property.
+    Please, use code below in model class (outside of this mixin) otherwise it will be replaced during regeneration of models.
+    Please, implement 'totalSumCompute' method in model class (outside of this mixin) if you want to compute value of 'totalSum' property.
+
+    @method _totalSumCompute
+    @private
+    @example
+      ```javascript
+      _totalSumChanged: on('init', observer('totalSum', function() {
+        once(this, '_totalSumCompute');
+      }))
+      ```
+  */
+  _totalSumCompute: function() {
+    let result = (this.totalSumCompute && typeof this.totalSumCompute === 'function') ? this.totalSumCompute() : null;
+    this.set('totalSum', result);
+  },
   product: DS.belongsTo('i-i-s-shop-product', { inverse: null, async: false }),
   order: DS.belongsTo('i-i-s-shop-order', { inverse: 'orderItem', async: false })
 });
@@ -69,5 +92,10 @@ export let defineProjections = function (modelClass) {
     amount: attr('Количество', { index: 6 }),
     priceWTaxes: attr('Цена с налогом', { index: 7 }),
     totalSum: attr('Сумма по позиции', { index: 8 })
+  });
+
+  modelClass.defineProjection('OrderItemInOrderL', 'i-i-s-shop-order-item', {
+    amount: attr('~', { index: 0, hidden: true }),
+    priceWTaxes: attr('~', { index: 1, hidden: true })
   });
 };

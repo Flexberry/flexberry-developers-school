@@ -9,8 +9,8 @@ export let Model = Mixin.create({
   name: DS.attr('string'),
   measure: DS.attr('string'),
   description: DS.attr('string'),
-  price: DS.attr('number'),
-  weight: DS.attr('number')
+  price: DS.attr('decimal'),
+  weight: DS.attr('decimal')
 });
 
 export let ValidationRules = {

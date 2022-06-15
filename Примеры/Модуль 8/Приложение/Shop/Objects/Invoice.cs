@@ -16,7 +16,7 @@ namespace IIS.Shop
     
     
     // *** Start programmer edit section *** (Using statements)
-
+    using ICSSoft.STORMNET.Business;
     // *** End programmer edit section *** (Using statements)
 
 
@@ -65,16 +65,14 @@ namespace IIS.Shop
             "Note as \'Примечание\'",
             "ShipmentDateTime as \'Дата и время отгрузки\'",
             "ResponsiblePerson.LastName as \'Товар выдал\'"})]
+    [AssociatedDetailViewAttribute("InvoiceL", "InvoiceItem", "InvoiceItemInInvoiceL", true, "", "", false, new string[] {
+            ""})]
     public class Invoice : IIS.Shop.Document
     {
         
         private IIS.Shop.InvoiceStatus fStatus = IIS.Shop.InvoiceStatus.New;
         
         private System.DateTime? fShipmentDateTime;
-        
-        private double fTotalSum;
-        
-        private double fTotalWeight;
         
         private string fNote;
         
@@ -159,28 +157,33 @@ namespace IIS.Shop
         // *** Start programmer edit section *** (Invoice.TotalSum CustomAttributes)
 
         // *** End programmer edit section *** (Invoice.TotalSum CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(SQLDataService), "SELECT SUM(Price * Amount) FROM InvoiceItem WHERE InvoiceItem.Накладная = STORMMa" +
+            "inObjectKey")]
         public virtual double TotalSum
         {
             get
             {
-                // *** Start programmer edit section *** (Invoice.TotalSum Get start)
+                // *** Start programmer edit section *** (Invoice.TotalSum Get)
+                if (!CheckLoadedProperty(nameof(InvoiceItem)))
+                {
+                    throw new InvalidOperationException($"The '{nameof(InvoiceItem)}' property not loaded.");
+                }
 
-                // *** End programmer edit section *** (Invoice.TotalSum Get start)
-                double result = this.fTotalSum;
-                // *** Start programmer edit section *** (Invoice.TotalSum Get end)
+                double sum = 0;
+                foreach (InvoiceItem item in InvoiceItem)
+                {
+                    sum += item.Price * item.Amount;
+                }
 
-                // *** End programmer edit section *** (Invoice.TotalSum Get end)
-                return result;
+                return sum;
+                // *** End programmer edit section *** (Invoice.TotalSum Get)
             }
             set
             {
-                // *** Start programmer edit section *** (Invoice.TotalSum Set start)
+                // *** Start programmer edit section *** (Invoice.TotalSum Set)
 
-                // *** End programmer edit section *** (Invoice.TotalSum Set start)
-                this.fTotalSum = value;
-                // *** Start programmer edit section *** (Invoice.TotalSum Set end)
-
-                // *** End programmer edit section *** (Invoice.TotalSum Set end)
+                // *** End programmer edit section *** (Invoice.TotalSum Set)
             }
         }
         
@@ -190,28 +193,33 @@ namespace IIS.Shop
         // *** Start programmer edit section *** (Invoice.TotalWeight CustomAttributes)
 
         // *** End programmer edit section *** (Invoice.TotalWeight CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(SQLDataService), "SELECT SUM(Weight) FROM InvoiceItem WHERE InvoiceItem.Накладная = STORMMainObject" +
+            "Key")]
         public virtual double TotalWeight
         {
             get
             {
-                // *** Start programmer edit section *** (Invoice.TotalWeight Get start)
+                // *** Start programmer edit section *** (Invoice.TotalWeight Get)
+                if (!CheckLoadedProperty(nameof(InvoiceItem)))
+                {
+                    throw new InvalidOperationException($"The '{nameof(InvoiceItem)}' property not loaded.");
+                }
 
-                // *** End programmer edit section *** (Invoice.TotalWeight Get start)
-                double result = this.fTotalWeight;
-                // *** Start programmer edit section *** (Invoice.TotalWeight Get end)
+                double weight = 0;
+                foreach (InvoiceItem item in InvoiceItem)
+                {
+                    weight += item.Weight;
+                }
 
-                // *** End programmer edit section *** (Invoice.TotalWeight Get end)
-                return result;
+                return weight;
+                // *** End programmer edit section *** (Invoice.TotalWeight Get)
             }
             set
             {
-                // *** Start programmer edit section *** (Invoice.TotalWeight Set start)
+                // *** Start programmer edit section *** (Invoice.TotalWeight Set)
 
-                // *** End programmer edit section *** (Invoice.TotalWeight Set start)
-                this.fTotalWeight = value;
-                // *** Start programmer edit section *** (Invoice.TotalWeight Set end)
-
-                // *** End programmer edit section *** (Invoice.TotalWeight Set end)
+                // *** End programmer edit section *** (Invoice.TotalWeight Set)
             }
         }
         

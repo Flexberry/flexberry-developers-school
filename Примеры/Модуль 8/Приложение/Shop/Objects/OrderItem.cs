@@ -12,6 +12,7 @@ namespace IIS.Shop
 {
     using System;
     using System.Xml;
+    using ICSSoft.STORMNET.Business;
     using ICSSoft.STORMNET;
     
     
@@ -26,6 +27,7 @@ namespace IIS.Shop
     // *** Start programmer edit section *** (OrderItem CustomAttributes)
 
     // *** End programmer edit section *** (OrderItem CustomAttributes)
+    [BusinessServer("IIS.Shop.OrderItemBS, Shop.BusinessServers", ICSSoft.STORMNET.Business.DataServiceObjectEvents.OnAllEvents)]
     [AutoAltered()]
     [Caption("Строка заказа")]
     [AccessType(ICSSoft.STORMNET.AccessType.none)]
@@ -45,14 +47,17 @@ namespace IIS.Shop
             "Product.Weight",
             "Product.Measure"})]
     [MasterViewDefineAttribute("OrderItemE", "Product", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Name")]
+    [View("OrderItemInOrderL", new string[] {
+            "Amount as \'\'",
+            "PriceWTaxes as \'\'"}, Hidden=new string[] {
+            "Amount",
+            "PriceWTaxes"})]
     public class OrderItem : ICSSoft.STORMNET.DataObject
     {
         
         private int fAmount;
         
         private double fPriceWTaxes;
-        
-        private double fTotalSum;
         
         private IIS.Shop.Product fProduct;
         
@@ -131,28 +136,21 @@ namespace IIS.Shop
         // *** Start programmer edit section *** (OrderItem.TotalSum CustomAttributes)
 
         // *** End programmer edit section *** (OrderItem.TotalSum CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(SQLDataService), "@PriceWTaxes@ * @Amount@")]
         public virtual double TotalSum
         {
             get
             {
-                // *** Start programmer edit section *** (OrderItem.TotalSum Get start)
-
-                // *** End programmer edit section *** (OrderItem.TotalSum Get start)
-                double result = this.fTotalSum;
-                // *** Start programmer edit section *** (OrderItem.TotalSum Get end)
-
-                // *** End programmer edit section *** (OrderItem.TotalSum Get end)
-                return result;
+                // *** Start programmer edit section *** (OrderItem.TotalSum Get)
+                return PriceWTaxes * Amount;
+                // *** End programmer edit section *** (OrderItem.TotalSum Get)
             }
             set
             {
-                // *** Start programmer edit section *** (OrderItem.TotalSum Set start)
+                // *** Start programmer edit section *** (OrderItem.TotalSum Set)
 
-                // *** End programmer edit section *** (OrderItem.TotalSum Set start)
-                this.fTotalSum = value;
-                // *** Start programmer edit section *** (OrderItem.TotalSum Set end)
-
-                // *** End programmer edit section *** (OrderItem.TotalSum Set end)
+                // *** End programmer edit section *** (OrderItem.TotalSum Set)
             }
         }
         
@@ -238,6 +236,17 @@ namespace IIS.Shop
                 get
                 {
                     return ICSSoft.STORMNET.Information.GetView("OrderItemE", typeof(IIS.Shop.OrderItem));
+                }
+            }
+            
+            /// <summary>
+            /// "OrderItemInOrderL" view.
+            /// </summary>
+            public static ICSSoft.STORMNET.View OrderItemInOrderL
+            {
+                get
+                {
+                    return ICSSoft.STORMNET.Information.GetView("OrderItemInOrderL", typeof(IIS.Shop.OrderItem));
                 }
             }
         }

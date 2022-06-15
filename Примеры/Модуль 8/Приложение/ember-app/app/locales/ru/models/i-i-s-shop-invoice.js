@@ -104,6 +104,18 @@ export default {
         lastName: {
           __caption__: 'Товар выдал'
         }
+      },
+      invoiceItem: {
+        __caption__: '',
+        price: {
+          __caption__: '~'
+        },
+        amount: {
+          __caption__: '~'
+        },
+        weight: {
+          __caption__: '~'
+        }
       }
     }
   },

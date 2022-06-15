@@ -100,15 +100,19 @@ export default EditFormController.extend({
            break;
        }
      }
+
+     if (bindingPath === 'priceWTaxes') {
+       cellComponent.componentName = 'order-item/price-w-taxes';
+     }
+
+     if (bindingPath === 'totalSum') {
+       cellComponent.componentName = 'order-item/total-sum';
+     }
+
      return cellComponent;
    },
 
    actions: {
-      configurateOrderItemRow(rowConfig) {
-        let readonlyColumns = ['priceWTaxes', 'totalSum'];
-        set(rowConfig, 'readonlyColumns', readonlyColumns);
-      },
-
       /**
         * Очистка лукапа
         */

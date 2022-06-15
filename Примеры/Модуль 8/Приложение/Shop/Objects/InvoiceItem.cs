@@ -16,7 +16,7 @@ namespace IIS.Shop
     
     
     // *** Start programmer edit section *** (Using statements)
-
+    using ICSSoft.STORMNET.Business;
     // *** End programmer edit section *** (Using statements)
 
 
@@ -40,6 +40,13 @@ namespace IIS.Shop
             "Product.Name",
             "Product.ProductCode"})]
     [MasterViewDefineAttribute("InvoiceItemE", "Product", ICSSoft.STORMNET.LookupTypeEnum.Standard, "", "Name")]
+    [View("InvoiceItemInInvoiceL", new string[] {
+            "Price as \'\'",
+            "Amount as \'\'",
+            "Weight as \'\'"}, Hidden=new string[] {
+            "Price",
+            "Amount",
+            "Weight"})]
     public class InvoiceItem : ICSSoft.STORMNET.DataObject
     {
         
@@ -48,8 +55,6 @@ namespace IIS.Shop
         private double fWeight;
         
         private double fPrice;
-        
-        private double fTotalSum;
         
         private IIS.Shop.Product fProduct;
         
@@ -159,28 +164,21 @@ namespace IIS.Shop
         // *** Start programmer edit section *** (InvoiceItem.TotalSum CustomAttributes)
 
         // *** End programmer edit section *** (InvoiceItem.TotalSum CustomAttributes)
+        [ICSSoft.STORMNET.NotStored()]
+        [DataServiceExpression(typeof(SQLDataService), "@Price@ * @Amount@")]
         public virtual double TotalSum
         {
             get
             {
-                // *** Start programmer edit section *** (InvoiceItem.TotalSum Get start)
-
-                // *** End programmer edit section *** (InvoiceItem.TotalSum Get start)
-                double result = this.fTotalSum;
-                // *** Start programmer edit section *** (InvoiceItem.TotalSum Get end)
-
-                // *** End programmer edit section *** (InvoiceItem.TotalSum Get end)
-                return result;
+                // *** Start programmer edit section *** (InvoiceItem.TotalSum Get)
+                return Price * Amount;
+                // *** End programmer edit section *** (InvoiceItem.TotalSum Get)
             }
             set
             {
-                // *** Start programmer edit section *** (InvoiceItem.TotalSum Set start)
+                // *** Start programmer edit section *** (InvoiceItem.TotalSum Set)
 
-                // *** End programmer edit section *** (InvoiceItem.TotalSum Set start)
-                this.fTotalSum = value;
-                // *** Start programmer edit section *** (InvoiceItem.TotalSum Set end)
-
-                // *** End programmer edit section *** (InvoiceItem.TotalSum Set end)
+                // *** End programmer edit section *** (InvoiceItem.TotalSum Set)
             }
         }
         
@@ -266,6 +264,17 @@ namespace IIS.Shop
                 get
                 {
                     return ICSSoft.STORMNET.Information.GetView("InvoiceItemE", typeof(IIS.Shop.InvoiceItem));
+                }
+            }
+            
+            /// <summary>
+            /// "InvoiceItemInInvoiceL" view.
+            /// </summary>
+            public static ICSSoft.STORMNET.View InvoiceItemInInvoiceL
+            {
+                get
+                {
+                    return ICSSoft.STORMNET.Information.GetView("InvoiceItemInInvoiceL", typeof(IIS.Shop.InvoiceItem));
                 }
             }
         }

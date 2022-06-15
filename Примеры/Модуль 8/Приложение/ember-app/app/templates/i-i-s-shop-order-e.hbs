@@ -72,12 +72,11 @@
   <div class="field">
     {{flexberry-field
       readonly=true
-      value=model.totalSum
-      class=(if (v-get validationObject "totalSum" "isInvalid") "error")
+      value=model.actualTotalSum
       label=(t "forms.i-i-s-shop-order-e.totalSum-caption")
     }}
-    {{flexberry-validationmessage error=(v-get validationObject "totalSum" "messages")}}
   </div>
+
   <div class="field">
     <label>{{t "forms.i-i-s-shop-order-e.paymentDate-caption"}}</label>
     {{
@@ -113,7 +112,6 @@
       content=model.orderItem
       readonly=model.isBlocked
       orderable=false
-      configurateRow=(action "configurateOrderItemRow")
       class=(if (v-get validationObject "orderItem" "isInvalid") "error")
     }}
     {{flexberry-validationmessage error=(v-get validationObject "orderItem" "messages")}}
